@@ -15,8 +15,8 @@ create('nw_nspc', 'parent')
 
 print(scopes)
 
-# def add(namespace, var):
-    # namespace[]
+def add(namespace, var):
+    namespace[]
 
 
 
