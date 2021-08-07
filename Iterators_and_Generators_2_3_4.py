@@ -1,3 +1,4 @@
+
 class multifilter:
     def judge_half(pos, neg):
         if pos >= neg:
@@ -6,6 +7,7 @@ class multifilter:
             return False
 
     def judge_all(pos, neg):
+        print('judge_all')
         if neg == 0:
             return True
         else:
@@ -21,23 +23,35 @@ class multifilter:
         self.iterable = iterable
         self.judge = judge
         self.funcs = funcs
-        print(self.funcs[0])
+        self.index = 0
+        print('init')
+        # print(self.funcs)
 
     def __iter__(self):
-        for i in self.iterable:
+        return self
+
+    def __next__(self):
+        # print(len(self.iterable))
+        print('next')
+        if self.index < len(self.iterable):
+            self.index += 1
             pos = 0
             neg = 0
-            # print(self.iterable[i])
-            for f in self.funcs[0]:
-                if f(i):
+            for f in self.funcs:
+                if f(self.index):
                     pos += 1
                 else:
                     neg += 1
+            print(self.judge(pos, neg))
             if self.judge(pos, neg):
-                yield self.iterable[i]
-
+                # print(self.iterable[self.index])
+                yield self.iterable[self.index]
+            else:
+                return self.__next__()
+        raise StopIteration
 
 #             yield self.iterable[i]
+
 
 def fun2(x):
     return x % 2 == 0
@@ -52,8 +66,8 @@ def fun5(x):
 
 
 a = [i for i in range(21)]
-
+print(multifilter(a, fun2, fun3, fun5))
 # ob = multifilter(a)
 for i in multifilter(a, fun2, fun3, fun5):
-    # print(next(i))
     print(i)
+    # print('TEST')
