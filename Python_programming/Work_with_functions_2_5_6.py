@@ -17,5 +17,3 @@ print(mod_3_1(4)) # True
 
 
 
-
-
