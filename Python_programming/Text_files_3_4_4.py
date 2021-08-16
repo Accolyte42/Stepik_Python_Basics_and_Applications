@@ -17,8 +17,16 @@ student2 = {
 }
 
 data = [student1, student2]
-print(json.dumps(data, indent=4, sort_keys=True)) # вывод внизу
+# print(json.dumps(data, indent=4, sort_keys=True)) # вывод внизу
 with open('students.json', 'w') as f:
     json.dump(data, f, indent=4, sort_keys=True)
-# js = json.loads(input())
 
+# получение из json формата обратно в python
+# data_json = json.dumps(data, indent=4, sort_keys=True)
+# data_again = json.loads(data_json)
+# print(sum(data_again[1]['scores']))
+
+# чтение из файла
+with open('students.json', 'r') as f:
+    data_again = json.load(f)
+    print(sum(data_again[1]['scores']))
